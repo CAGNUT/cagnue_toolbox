@@ -7,8 +7,13 @@ module CagnutToolbox
       @toolbox = CagnutToolbox::Base.new
     end
 
-    def qseq2fastq dirs
-      toolbox.qseq2fastq dirs if check_files
+    def qseq2fastq dirs, order=1
+      if check_files
+        job_name, filename = toolbox.qseq2fastq dirs, order
+        [job_name, filename, order+1]
+      else
+        [nil, nil, order]
+      end
     end
 
     private

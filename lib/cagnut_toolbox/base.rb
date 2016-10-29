@@ -3,7 +3,7 @@ require 'cagnut_toolbox/functions/qseq_to_fastq'
 module CagnutToolbox
   class Base
     def qseq2fastq dirs
-      opts = { dirs: dirs }
+      opts = { dirs: dirs, order: order }
       qseq2fastq = CagnutToolbox::QseqToFastq.new opts
       qseq2fastq.run
     end

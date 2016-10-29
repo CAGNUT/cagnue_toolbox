@@ -7,6 +7,7 @@ module CagnutToolbox
     def_delegators :'CagnutToolbox.config', :exe_path
 
     def initialize opts = {}
+      @order = sprintf '%02i', opts[:order]
       @input = opts[:input].nil? ? "#{seqs_path}" : opts[:input]
       @input.gsub! '.gz', ''
       @input2 = File.expand_path fetch_filename, File.dirname(@input)
@@ -40,7 +41,7 @@ module CagnutToolbox
     end
 
     def generate_script
-      script_name = 'toolbox_qseq2fastq'
+      script_name = "#{@order}_toolbox_qseq2fastq"
       exe_qseq_to_fastq = "ruby #{exe_path}/qseq_to_fastq.rb"
       file = File.join jobs_dir, "#{script_name}.sh"
       File.open(file, 'w') do |f|
